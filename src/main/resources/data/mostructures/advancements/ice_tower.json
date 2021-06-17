@@ -1,0 +1,33 @@
+{
+  "parent": "mostructures:root",
+  "display": {
+    "icon": {
+      "item": "minecraft:ice"
+    },
+    "title": {
+      "translate": "advancements.mostructures.icetower.title"
+    },
+    "description": {
+      "translate": "advancements.mostructures.icetower.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "ice_tower": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "location": {
+          "feature": "mostructures:ice_tower"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "ice_tower"
+    ]
+  ]
+}
