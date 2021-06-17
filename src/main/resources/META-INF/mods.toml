@@ -5,7 +5,7 @@ license="LGPL 3.0 License"
 [[mods]] #mandatory
 modId="mostructures" #mandatory
 logoFile="icon.png"
-version="1.2.0-1.16" #mandatory
+version="1.2.0-1.16.5" #mandatory
 displayName="Mo' Structures" #mandatory
 authors="Frqnny" #optional
 description='''
