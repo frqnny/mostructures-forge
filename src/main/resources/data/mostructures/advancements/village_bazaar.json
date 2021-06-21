@@ -20,7 +20,7 @@
       "trigger": "minecraft:location",
       "conditions": {
         "location": {
-          "feature": "mostructures:village_bazaar"
+          "feature": "mostructures:bazaar"
         }
       }
     }
