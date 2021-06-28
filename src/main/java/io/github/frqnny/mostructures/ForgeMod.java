@@ -1,6 +1,8 @@
 package io.github.frqnny.mostructures;
 
 import com.mojang.serialization.Codec;
+import io.github.frqnny.mostructures.config.ConfigHelper;
+import io.github.frqnny.mostructures.config.MoStructuresConfig;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
@@ -16,6 +18,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -44,7 +47,8 @@ public class ForgeMod {
     }
 
     public void setup(final FMLCommonSetupEvent event) {
-        event.enqueueWork(MoStructures::register);
+        ConfigHelper.register(ModConfig.Type.COMMON, MoStructuresConfig::new, "mostructures-forgeconfig-v1.toml");
+        event.enqueueWork(() -> MoStructures.register(event));
     }
 
     public void biomeModification(final BiomeLoadingEvent event) {

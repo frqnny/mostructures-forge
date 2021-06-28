@@ -2,7 +2,6 @@ package io.github.frqnny.mostructures.structure;
 
 import com.google.common.collect.ImmutableList;
 import io.github.frqnny.mostructures.MoStructures;
-import io.github.frqnny.mostructures.generator.BarnHouseGenerator;
 import io.github.frqnny.mostructures.generator.IceTowerGenerator;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;

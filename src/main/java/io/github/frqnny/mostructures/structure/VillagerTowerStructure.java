@@ -1,52 +1,42 @@
 package io.github.frqnny.mostructures.structure;
 
 import io.github.frqnny.mostructures.MoStructures;
+import io.github.frqnny.mostructures.generator.BoarHatTavernGenerator;
+import io.github.frqnny.mostructures.generator.PillagerFactoryGenerator;
+import io.github.frqnny.mostructures.generator.VillagerMarketGenerator;
 import io.github.frqnny.mostructures.generator.VillagerTowerGenerator;
-import net.minecraft.structure.MarginedStructureStart;
-import net.minecraft.structure.StructureManager;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockBox;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.registry.DynamicRegistryManager;
+import net.minecraft.util.math.MutableBoundingBox;
+import net.minecraft.util.registry.DynamicRegistries;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.source.BiomeSource;
-import net.minecraft.world.gen.ChunkRandom;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.feature.StructureFeature;
-import net.minecraft.world.gen.feature.StructurePoolFeatureConfig;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.feature.structure.MarginedStructureStart;
+import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.feature.structure.VillageConfig;
+import net.minecraft.world.gen.feature.template.TemplateManager;
 
-public class VillagerTowerStructure extends SpacedStructure<StructurePoolFeatureConfig> {
-    public static final Identifier ID = MoStructures.id("villager_tower");
+public class VillagerTowerStructure extends SpacedStructure<VillageConfig> {
+    public static final ResourceLocation ID = MoStructures.id("tavern");
 
     public VillagerTowerStructure() {
-        super(StructurePoolFeatureConfig.CODEC);
-    }
-
-
-    @Override
-    protected boolean shouldStartAt(ChunkGenerator chunkGenerator, BiomeSource biomeSource, long worldSeed, ChunkRandom chunkRandom, int chunkX, int chunkZ, Biome biome, ChunkPos chunkPos, StructurePoolFeatureConfig featureConfig) {
-        //desert is ugly, we make it rarer :)
-        if (biome.getCategory() == Biome.Category.DESERT) {
-            return MoStructures.random.nextBoolean();
-        }
-        return super.shouldStartAt(chunkGenerator, biomeSource, worldSeed, chunkRandom, chunkX, chunkZ, biome, chunkPos, featureConfig);
+        super(VillageConfig.CODEC);
     }
 
     @Override
-    public StructureStartFactory<StructurePoolFeatureConfig> getStructureStartFactory() {
+    public Structure.IStartFactory<VillageConfig> getStartFactory() {
         return VillagerTowerStructure.Start::new;
     }
 
-    public static class Start extends MarginedStructureStart<StructurePoolFeatureConfig> {
-        public Start(StructureFeature<StructurePoolFeatureConfig> feature, int chunkX, int chunkZ, BlockBox box, int references, long seed) {
+    public static class Start extends MarginedStructureStart<VillageConfig> {
+        public Start(Structure<VillageConfig> feature, int chunkX, int chunkZ, MutableBoundingBox box, int references, long seed) {
             super(feature, chunkX, chunkZ, box, references, seed);
         }
 
         @Override
-        public void init(DynamicRegistryManager registryManager, ChunkGenerator chunkGenerator, StructureManager structureManager, int x, int z, Biome biome, StructurePoolFeatureConfig config) {
-            VillagerTowerGenerator.addPieces(registryManager, config, chunkGenerator, structureManager, new BlockPos(x << 4, 0, z << 4), children, random);
-            this.setBoundingBoxFromChildren();
+        public void generatePieces(DynamicRegistries registryManager, ChunkGenerator chunkGenerator, TemplateManager structureManager, int x, int z, Biome biome, VillageConfig config) {
+            VillagerTowerGenerator.addPieces(registryManager, config, chunkGenerator, structureManager, new BlockPos(x << 4, 0, z << 4), pieces, random);
+            this.calculateBoundingBox();
         }
     }
 }

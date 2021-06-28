@@ -1,42 +1,45 @@
 package io.github.frqnny.mostructures.structure;
 
 import io.github.frqnny.mostructures.MoStructures;
+import io.github.frqnny.mostructures.generator.AirBalloonGenerator;
+import io.github.frqnny.mostructures.generator.LighthouseGenerator;
 import io.github.frqnny.mostructures.generator.VillageBazaarGenerator;
-import net.minecraft.structure.MarginedStructureStart;
-import net.minecraft.structure.PoolStructurePiece;
-import net.minecraft.structure.StructureManager;
-import net.minecraft.structure.pool.StructurePoolBasedGenerator;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockBox;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.DynamicRegistryManager;
+import net.minecraft.util.math.MutableBoundingBox;
+import net.minecraft.util.registry.DynamicRegistries;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.feature.StructureFeature;
-import net.minecraft.world.gen.feature.StructurePoolFeatureConfig;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.feature.jigsaw.JigsawManager;
+import net.minecraft.world.gen.feature.structure.AbstractVillagePiece;
+import net.minecraft.world.gen.feature.structure.MarginedStructureStart;
+import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.feature.structure.VillageConfig;
+import net.minecraft.world.gen.feature.template.TemplateManager;
 
-public class VillagerBazaarStructure extends SpacedStructure<StructurePoolFeatureConfig> {
-    public static final Identifier ID = MoStructures.id("bazaar");
+public class VillagerBazaarStructure extends SpacedStructure<VillageConfig> {
+    public static final ResourceLocation ID = MoStructures.id("bazaar");
 
     public VillagerBazaarStructure() {
-        super(StructurePoolFeatureConfig.CODEC);
+        super(VillageConfig.CODEC);
     }
 
     @Override
-    public StructureStartFactory<StructurePoolFeatureConfig> getStructureStartFactory() {
+    public Structure.IStartFactory<VillageConfig> getStartFactory() {
         return VillagerBazaarStructure.Start::new;
     }
 
-    public static class Start extends MarginedStructureStart<StructurePoolFeatureConfig> {
-        public Start(StructureFeature<StructurePoolFeatureConfig> structureFeature, int i, int j, BlockBox blockBox, int k, long l) {
-            super(structureFeature, i, j, blockBox, k, l);
+    public static class Start extends MarginedStructureStart<VillageConfig> {
+        public Start(Structure<VillageConfig> feature, int chunkX, int chunkZ, MutableBoundingBox box, int references, long seed) {
+            super(feature, chunkX, chunkZ, box, references, seed);
         }
 
         @Override
-        public void init(DynamicRegistryManager registryManager, ChunkGenerator chunkGenerator, StructureManager manager, int chunkX, int chunkZ, Biome biome, StructurePoolFeatureConfig config) {
-            VillageBazaarGenerator.init();
-            StructurePoolBasedGenerator.method_30419(registryManager, config, PoolStructurePiece::new, chunkGenerator, manager, new BlockPos(chunkX << 4, -3, chunkZ << 4), this.children, this.random, true, true);
-            this.setBoundingBoxFromChildren();
+        public void generatePieces(DynamicRegistries registry, ChunkGenerator chunkGenerator, TemplateManager structureManager, int x, int z, Biome biome, VillageConfig config) {
+            VillageBazaarGenerator.addPieces(registry, config, chunkGenerator, structureManager, new BlockPos(x * 16, 0, z << 4), pieces, random);
+            this.calculateBoundingBox();
         }
     }
+
+
 }
