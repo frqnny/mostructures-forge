@@ -35,7 +35,7 @@ public class LighthouseStructure extends SpacedStructure<VillageConfig> {
         @Override
         public void generatePieces(DynamicRegistries registry, ChunkGenerator chunkGenerator, TemplateManager structureManager, int x, int z, Biome biome, VillageConfig config) {
             LighthouseGenerator.init();
-            JigsawManager.addPieces(registry, config, AbstractVillagePiece::new, chunkGenerator, structureManager, new BlockPos(x * 16, 0, z << 4), pieces, random, true, true);
+            JigsawManager.addPieces(registry, config, AbstractVillagePiece::new, chunkGenerator, structureManager, new BlockPos(x * 16, 65, z << 4), pieces, random, false, false);
             this.calculateBoundingBox();
         }
     }

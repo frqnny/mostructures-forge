@@ -1,7 +1,7 @@
 package io.github.frqnny.mostructures.structure;
 
 import io.github.frqnny.mostructures.MoStructures;
-import io.github.frqnny.mostructures.generator.LighthouseGenerator;
+import io.github.frqnny.mostructures.generator.MoaiGenerator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
@@ -36,7 +36,7 @@ public class MoaiStructure extends SpacedStructure<VillageConfig> {
 
     @Override
     public Structure.IStartFactory<VillageConfig> getStartFactory() {
-        return LighthouseStructure.Start::new;
+        return MoaiStructure.Start::new;
     }
 
     public static class Start extends MarginedStructureStart<VillageConfig> {
@@ -46,8 +46,8 @@ public class MoaiStructure extends SpacedStructure<VillageConfig> {
 
         @Override
         public void generatePieces(DynamicRegistries registry, ChunkGenerator chunkGenerator, TemplateManager structureManager, int x, int z, Biome biome, VillageConfig config) {
-            LighthouseGenerator.init();
-            JigsawManager.addPieces(registry, config, AbstractVillagePiece::new, chunkGenerator, structureManager, new BlockPos(x * 16, 0, z << 4), pieces, random, true, true);
+            MoaiGenerator.init();
+            JigsawManager.addPieces(registry, config, AbstractVillagePiece::new, chunkGenerator, structureManager, new BlockPos(x << 4, -3, z << 4), pieces, random, true, true);
             this.calculateBoundingBox();
         }
     }

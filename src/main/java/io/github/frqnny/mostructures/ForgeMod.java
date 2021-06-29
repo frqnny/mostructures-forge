@@ -63,7 +63,9 @@ public class ForgeMod {
     public void addDimensionalSpacing(final WorldEvent.Load event) {
         if (event.getWorld() instanceof ServerWorld) {
             ServerWorld serverWorld = (ServerWorld) event.getWorld();
-
+            if (!serverWorld.dimension().equals(World.OVERWORLD)) {
+                return;
+            }
 
             try {
                 if (GETCODEC_METHOD == null)

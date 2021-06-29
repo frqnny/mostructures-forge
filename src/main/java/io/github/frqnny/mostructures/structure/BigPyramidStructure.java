@@ -22,7 +22,7 @@ public class BigPyramidStructure extends SpacedStructure<VillageConfig> {
 
     @Override
     public Structure.IStartFactory<VillageConfig> getStartFactory() {
-        return BarnHouseStructure.Start::new;
+        return BigPyramidStructure.Start::new;
     }
 
     public static class Start extends MarginedStructureStart<VillageConfig> {

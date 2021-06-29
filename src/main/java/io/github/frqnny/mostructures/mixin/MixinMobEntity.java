@@ -5,6 +5,7 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.passive.RabbitEntity;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,8 +17,8 @@ import javax.annotation.Nullable;
 @Mixin(MobEntity.class)
 public class MixinMobEntity {
 
-    @Inject(at = @At("TAIL"), method = "initialize", cancellable = true)
-    public void rabbitPlsWork(IServerWorld world, IServerWorld difficulty, SpawnReason spawnReason, @Nullable ILivingEntityData entityData, @Nullable CompoundNBT entityTag, CallbackInfoReturnable<ILivingEntityData> info) {
+    @Inject(at = @At("TAIL"), method = "finalizeSpawn", cancellable = true)
+    public void rabbitPlsWork(IServerWorld world, DifficultyInstance difficulty, SpawnReason spawnReason, @Nullable ILivingEntityData entityData, @Nullable CompoundNBT entityTag, CallbackInfoReturnable<ILivingEntityData> info) {
 
         if (((MobEntity) (Object) this) instanceof RabbitEntity && entityTag != null && entityTag.contains("RabbitType")) {
             ((RabbitEntity) (Object) this).setRabbitType(entityTag.getInt("RabbitType"));

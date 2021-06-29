@@ -33,7 +33,7 @@ public class IceTowerStructure extends SpacedStructure<VillageConfig> {
 
     @Override
     public Structure.IStartFactory<VillageConfig> getStartFactory() {
-        return BarnHouseStructure.Start::new;
+        return IceTowerStructure.Start::new;
     }
 
     public static class Start extends MarginedStructureStart<VillageConfig> {

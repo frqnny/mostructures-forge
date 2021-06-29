@@ -32,7 +32,7 @@ public class TheCastleInTheSkyStructure extends SpacedStructure<VillageConfig> {
 
         @Override
         public void generatePieces(DynamicRegistries registryManager, ChunkGenerator chunkGenerator, TemplateManager structureManager, int x, int z, Biome biome, VillageConfig config) {
-            TheCastleInTheSkyGenerator.addPieces(registryManager, config, chunkGenerator, structureManager, new BlockPos(x << 4, 0, z << 4), pieces, random);
+            TheCastleInTheSkyGenerator.addPieces(registryManager, config, chunkGenerator, structureManager, new BlockPos(x << 4, 60, z << 4), pieces, random);
             this.calculateBoundingBox();
         }
     }

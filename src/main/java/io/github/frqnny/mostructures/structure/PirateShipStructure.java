@@ -32,7 +32,7 @@ public class PirateShipStructure extends SpacedStructure<VillageConfig> {
 
     @Override
     public Structure.IStartFactory<VillageConfig> getStartFactory() {
-        return LighthouseStructure.Start::new;
+        return PirateShipStructure.Start::new;
     }
 
     public static class Start extends MarginedStructureStart<VillageConfig> {
@@ -42,7 +42,7 @@ public class PirateShipStructure extends SpacedStructure<VillageConfig> {
 
         @Override
         public void generatePieces(DynamicRegistries registry, ChunkGenerator chunkGenerator, TemplateManager structureManager, int x, int z, Biome biome, VillageConfig config) {
-            PirateShipGenerator.addPieces(registry, config, chunkGenerator, structureManager, new BlockPos(x * 16, 0, z << 4), pieces, random);
+            PirateShipGenerator.addPieces(registry, config, chunkGenerator, structureManager, new BlockPos(x * 16, 58, z << 4), pieces, random);
             this.calculateBoundingBox();
         }
     }

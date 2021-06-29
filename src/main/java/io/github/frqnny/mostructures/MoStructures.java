@@ -89,6 +89,10 @@ public class MoStructures {
     }
 
     public static void putStructures(final BiomeLoadingEvent event) {
+
+        if (event.getName().getPath().contains("hill")) {
+            return;
+        }
         Biome.Category category = event.getCategory();
 
         switch (category) {
@@ -130,7 +134,9 @@ public class MoStructures {
                 add(event, ConfiguredFeatures.PILLAGER_FACTORY, CONFIG.pillagerFactory.get());
                 break;
             case OCEAN:
-                add(event, ConfiguredFeatures.PIRATE_SHIP, CONFIG.pirateShip.get());
+                if (!event.getName().getPath().contains("frozen") && event.getName().getPath().contains("deep")) {
+                    add(event, ConfiguredFeatures.PIRATE_SHIP, CONFIG.pirateShip.get());
+                }
                 break;
             case DESERT:
                 add(event, ConfiguredFeatures.DESERT_ABANDONED_CHURCH, CONFIG.abandonedChurch.get());
