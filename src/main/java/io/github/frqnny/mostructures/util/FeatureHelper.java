@@ -20,7 +20,7 @@ public class FeatureHelper {
     public static void placeStructure(ResourceLocation structureId, BlockPos pos, ISeedReader world, Random random) {
         Template structure = world.getLevel().getStructureManager().getOrCreate(structureId);
         Rotation blockRotation = Rotation.getRandom(random);
-        PlacementSettings structurePlacementData = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(blockRotation).setIgnoreEntities(false).setChunkPosition(null);
+        PlacementSettings structurePlacementData = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(blockRotation).setIgnoreEntities(false).setChunkPos(null);
         structure.placeInWorld(world, pos, structurePlacementData, random);
     }
 
@@ -41,7 +41,7 @@ public class FeatureHelper {
                     !chunk.getReferencesForFeature(ConfiguredFeatures.BARN_HOUSE.feature).isEmpty()
                             || !chunk.getReferencesForFeature(ConfiguredFeatures.JUNGLE_PYRAMID.feature).isEmpty()
                             || !chunk.getReferencesForFeature(ConfiguredFeatures.VILLAGER_TOWER.feature).isEmpty()
-                            || !chunk.getReferencesForFeature(MoStructures.ABANDONED_CHURCH).isEmpty()
+                            || !chunk.getReferencesForFeature(MoStructures.ABANDONED_CHURCH.get()).isEmpty()
                             || !chunk.getReferencesForFeature(ConfiguredFeatures.VILLAGER_MARKET.feature).isEmpty()
                             || !chunk.getReferencesForFeature(ConfiguredFeatures.PILLAGER_FACTORY.feature).isEmpty()
                             || !chunk.getReferencesForFeature(ConfiguredFeatures.TAVERN.feature).isEmpty()

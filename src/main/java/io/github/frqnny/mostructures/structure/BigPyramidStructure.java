@@ -1,7 +1,6 @@
 package io.github.frqnny.mostructures.structure;
 
 import io.github.frqnny.mostructures.MoStructures;
-import io.github.frqnny.mostructures.generator.BarnHouseGenerator;
 import io.github.frqnny.mostructures.generator.BigPyramidGenerator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;

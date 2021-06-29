@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.FlatChunkGenerator;
 import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.MinecraftForge;
@@ -33,9 +34,11 @@ public class ForgeMod {
 
 
     public ForgeMod() {
+        MoStructures.CONFIG = ConfigHelper.register(ModConfig.Type.COMMON, MoStructuresConfig::new, "mostructures-forgeconfig-v1.toml");
+
         // For registration and init stuff.
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        MoStructures.STRUCTURE_FEATURES.register(modEventBus);
+        MoStructures.STRUCTURES.register(modEventBus);
         modEventBus.addListener(this::setup);
 
         // For events that happen after initialization. This is probably going to be use a lot.
@@ -47,8 +50,7 @@ public class ForgeMod {
     }
 
     public void setup(final FMLCommonSetupEvent event) {
-        ConfigHelper.register(ModConfig.Type.COMMON, MoStructuresConfig::new, "mostructures-forgeconfig-v1.toml");
-        event.enqueueWork(() -> MoStructures.register(event));
+        event.enqueueWork(MoStructures::register);
     }
 
     public void biomeModification(final BiomeLoadingEvent event) {
@@ -78,8 +80,24 @@ public class ForgeMod {
             }
 
             Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(serverWorld.getChunkSource().generator.getSettings().structureConfig());
+            tempMap.putIfAbsent(MoStructures.BARN_HOUSE.get(), DimensionStructuresSettings.DEFAULTS.get(MoStructures.BARN_HOUSE.get()));
+            tempMap.putIfAbsent(MoStructures.BIG_PYRAMID.get(), DimensionStructuresSettings.DEFAULTS.get(MoStructures.BIG_PYRAMID.get()));
+            tempMap.putIfAbsent(MoStructures.JUNGLE_PYRAMID.get(), DimensionStructuresSettings.DEFAULTS.get(MoStructures.JUNGLE_PYRAMID.get()));
+            tempMap.putIfAbsent(MoStructures.THE_CASTLE_IN_THE_SKY.get(), DimensionStructuresSettings.DEFAULTS.get(MoStructures.THE_CASTLE_IN_THE_SKY.get()));
+            tempMap.putIfAbsent(MoStructures.VILLAGER_TOWER.get(), DimensionStructuresSettings.DEFAULTS.get(MoStructures.VILLAGER_TOWER.get()));
+            tempMap.putIfAbsent(MoStructures.VILLAGER_MARKET.get(), DimensionStructuresSettings.DEFAULTS.get(MoStructures.VILLAGER_MARKET.get()));
+            tempMap.putIfAbsent(MoStructures.PILLAGER_FACTORY.get(), DimensionStructuresSettings.DEFAULTS.get(MoStructures.PILLAGER_FACTORY.get()));
+            tempMap.putIfAbsent(MoStructures.ABANDONED_CHURCH.get(), DimensionStructuresSettings.DEFAULTS.get(MoStructures.ABANDONED_CHURCH.get()));
+            tempMap.putIfAbsent(MoStructures.ICE_TOWER.get(), DimensionStructuresSettings.DEFAULTS.get(MoStructures.ICE_TOWER.get()));
+            tempMap.putIfAbsent(MoStructures.TAVERN.get(), DimensionStructuresSettings.DEFAULTS.get(MoStructures.TAVERN.get()));
+            tempMap.putIfAbsent(MoStructures.KILLER_BUNNY_CASTLE.get(), DimensionStructuresSettings.DEFAULTS.get(MoStructures.KILLER_BUNNY_CASTLE.get()));
+            tempMap.putIfAbsent(MoStructures.PIRATE_SHIP.get(), DimensionStructuresSettings.DEFAULTS.get(MoStructures.PIRATE_SHIP.get()));
+            tempMap.putIfAbsent(MoStructures.LIGHTHOUSE.get(), DimensionStructuresSettings.DEFAULTS.get(MoStructures.LIGHTHOUSE.get()));
+            tempMap.putIfAbsent(MoStructures.MOAI.get(), DimensionStructuresSettings.DEFAULTS.get(MoStructures.MOAI.get()));
+            tempMap.putIfAbsent(MoStructures.AIR_BALLOON.get(), DimensionStructuresSettings.DEFAULTS.get(MoStructures.AIR_BALLOON.get()));
+
             //tempMap.putIfAbsent(STStructures.RUN_DOWN_HOUSE.get(), DimensionStructuresSettings.DEFAULTS.get(STStructures.RUN_DOWN_HOUSE.get()));
-            //serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMap;
+            serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMap;
         }
     }
 }

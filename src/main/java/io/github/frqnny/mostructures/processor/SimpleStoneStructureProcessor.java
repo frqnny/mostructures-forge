@@ -40,7 +40,7 @@ public class SimpleStoneStructureProcessor extends StructureProcessor {
     @Nullable
     public Template.BlockInfo processBlock(IWorldReader world, BlockPos pos, BlockPos blockPos, Template.BlockInfo structureBlockInfo, Template.BlockInfo structureBlockInfo2, PlacementSettings structurePlacementData) {
 
-         Random random = structurePlacementData.getRandom(structureBlockInfo2.pos);
+        Random random = structurePlacementData.getRandom(structureBlockInfo2.pos);
         BlockState blockState = structureBlockInfo2.state;
         BlockPos blockPos2 = structureBlockInfo2.pos;
         BlockState blockState2 = null;

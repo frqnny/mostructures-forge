@@ -1,9 +1,6 @@
 package io.github.frqnny.mostructures.structure;
 
 import io.github.frqnny.mostructures.MoStructures;
-import io.github.frqnny.mostructures.generator.BoarHatTavernGenerator;
-import io.github.frqnny.mostructures.generator.PillagerFactoryGenerator;
-import io.github.frqnny.mostructures.generator.VillagerMarketGenerator;
 import io.github.frqnny.mostructures.generator.VillagerTowerGenerator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;

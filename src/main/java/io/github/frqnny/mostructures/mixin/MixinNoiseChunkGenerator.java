@@ -28,7 +28,7 @@ public class MixinNoiseChunkGenerator {
         }
         if (accessor.getStructureAt(pos, false, ConfiguredFeatures.ICE_TOWER.feature).isValid()) {
             if (group == EntityClassification.MONSTER) {
-                info.setReturnValue(MoStructures.ICE_TOWER.getMonsterSpawns());
+                info.setReturnValue(MoStructures.ICE_TOWER.get().getDefaultSpawnList());
             }
         }
     }

@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "io.github.frqnny.mostructures.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "LakeFeatureMixin",
+    "MixinNoiseChunkGenerator",
+    "MixinMobEntity",
+    "MixinRabbitEntity"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "mostructures-refmap.json"
+}

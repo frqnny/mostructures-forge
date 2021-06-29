@@ -34,7 +34,6 @@ public class MoaiStructure extends SpacedStructure<VillageConfig> {
     }
 
 
-
     @Override
     public Structure.IStartFactory<VillageConfig> getStartFactory() {
         return LighthouseStructure.Start::new;

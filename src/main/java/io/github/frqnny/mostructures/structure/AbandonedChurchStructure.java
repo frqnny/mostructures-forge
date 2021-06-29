@@ -2,7 +2,6 @@ package io.github.frqnny.mostructures.structure;
 
 import io.github.frqnny.mostructures.MoStructures;
 import io.github.frqnny.mostructures.generator.AbandonedChurchGenerator;
-import io.github.frqnny.mostructures.generator.BarnHouseGenerator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
