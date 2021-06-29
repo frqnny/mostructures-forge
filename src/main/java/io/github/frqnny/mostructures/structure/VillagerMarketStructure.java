@@ -14,7 +14,7 @@ import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 
 public class VillagerMarketStructure extends SpacedStructure<VillageConfig> {
-    public static final ResourceLocation ID = MoStructures.id("villager_tower");
+    public static final ResourceLocation ID = MoStructures.id("villager_market");
 
     public VillagerMarketStructure() {
         super(VillageConfig.CODEC);

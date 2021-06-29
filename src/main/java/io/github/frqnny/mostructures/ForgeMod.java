@@ -39,6 +39,7 @@ public class ForgeMod {
         // For registration and init stuff.
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MoStructures.STRUCTURES.register(modEventBus);
+        MoStructures.FEATURES.register(modEventBus);
         modEventBus.addListener(this::setup);
 
         // For events that happen after initialization. This is probably going to be use a lot.

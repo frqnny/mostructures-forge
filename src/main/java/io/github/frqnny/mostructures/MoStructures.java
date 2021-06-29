@@ -69,6 +69,7 @@ public class MoStructures {
     public static MoStructuresConfig CONFIG;
 
     public static void register() {
+        ConfiguredFeatures.registerconfigureddFeatures();
         setupMapSpacingAndLand(BARN_HOUSE.get(), CONFIG.barnHouse_separation.get(), CONFIG.barnHouse_spacing.get(), 165757306, true);
         setupMapSpacingAndLand(BIG_PYRAMID.get(), CONFIG.bigPyramid_separation.get(), CONFIG.bigPyramid_spacing.get(), 239284294, true);
         setupMapSpacingAndLand(JUNGLE_PYRAMID.get(), CONFIG.junglePyramid_separation.get(), CONFIG.junglePyramid_spacing.get(), 312178642, true);
@@ -99,38 +100,47 @@ public class MoStructures {
                 add(event, ConfiguredFeatures.VILLAGER_MARKET, CONFIG.villagerMarket.get());
                 add(event, ConfiguredFeatures.VILLAGER_TOWER, CONFIG.villagerTower.get());
                 add(event, ConfiguredFeatures.BARN_HOUSE, CONFIG.barnHouse.get());
+                break;
             case SAVANNA:
                 add(event, ConfiguredFeatures.KILLER_BUNNY_CASTLE, CONFIG.killerBunnyCastle.get());
                 add(event, ConfiguredFeatures.SAVANNA_ABANDONED_CHURCH, CONFIG.abandonedChurch.get());
                 add(event, ConfiguredFeatures.VILLAGER_MARKET, CONFIG.villagerMarket.get());
                 add(event, ConfiguredFeatures.SAVANNA_VILLAGER_TOWER, CONFIG.villagerTower.get());
                 add(event, ConfiguredFeatures.BARN_HOUSE, CONFIG.barnHouse.get());
+                break;
             case FOREST:
                 add(event, ConfiguredFeatures.KILLER_BUNNY_CASTLE, CONFIG.killerBunnyCastle.get());
                 add(event, ConfiguredFeatures.TAVERN, CONFIG.tavern.get());
                 add(event, ConfiguredFeatures.VILLAGER_MARKET, CONFIG.villagerMarket.get());
                 add(event, ConfiguredFeatures.VILLAGER_TOWER, CONFIG.villagerTower.get());
+                break;
             case BEACH:
                 add(event, ConfiguredFeatures.AIR_BALLOON, CONFIG.airBalloon.get());
                 add(event, ConfiguredFeatures.MOAI, CONFIG.moai.get());
                 add(event, ConfiguredFeatures.LIGHTHOUSE, CONFIG.lighthouse.get());
                 add(event, ConfiguredFeatures.THE_CASTLE_IN_THE_SKY, CONFIG.theCastleInTheSky.get());
+                break;
             case ICY:
                 add(event, ConfiguredFeatures.ICE_TOWER, CONFIG.iceTower.get());
                 add(event, ConfiguredFeatures.SNOWY_ABANDONED_CHURCH, CONFIG.abandonedChurch.get());
                 add(event, ConfiguredFeatures.PILLAGER_FACTORY, CONFIG.pillagerFactory.get());
+                break;
             case TAIGA:
                 add(event, ConfiguredFeatures.TAIGA_ABANDONED_CHURCH, CONFIG.abandonedChurch.get());
                 add(event, ConfiguredFeatures.PILLAGER_FACTORY, CONFIG.pillagerFactory.get());
+                break;
             case OCEAN:
                 add(event, ConfiguredFeatures.PIRATE_SHIP, CONFIG.pirateShip.get());
+                break;
             case DESERT:
                 add(event, ConfiguredFeatures.DESERT_ABANDONED_CHURCH, CONFIG.abandonedChurch.get());
                 add(event, ConfiguredFeatures.BIG_PYRAMID, CONFIG.bigPyramid.get());
-
+                break;
             case JUNGLE:
                 add(event, ConfiguredFeatures.JUNGLE_PYRAMID, CONFIG.junglePyramid.get());
-
+                break;
+            default:
+                break;
         }
     }
 
@@ -141,7 +151,7 @@ public class MoStructures {
     }
 
     public static <F extends Structure<?>> void setupMapSpacingAndLand(F structure, int separation, int spacing, int salt, boolean transformSurroundingLand) {
-        setupMapSpacingAndLand(structure, new StructureSeparationSettings(separation, spacing, salt), transformSurroundingLand);
+        setupMapSpacingAndLand(structure, new StructureSeparationSettings(spacing, separation, salt), transformSurroundingLand);
     }
 
     public static <F extends Structure<?>> void setupMapSpacingAndLand(F structure, StructureSeparationSettings structureSeparationSettings, boolean transformSurroundingLand) {

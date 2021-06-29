@@ -35,7 +35,8 @@ public class AirBalloonStructure extends SpacedStructure<VillageConfig> {
         @Override
         public void generatePieces(DynamicRegistries registry, ChunkGenerator chunkGenerator, TemplateManager structureManager, int x, int z, Biome biome, VillageConfig config) {
             AirBalloonGenerator.init();
-            JigsawManager.addPieces(registry, config, AbstractVillagePiece::new, chunkGenerator, structureManager, new BlockPos(x * 16, 0, z << 4), pieces, random, true, true);
+            int yToAdd = Math.max(random.nextInt(100), 45);
+            JigsawManager.addPieces(registry, config, AbstractVillagePiece::new, chunkGenerator, structureManager, new BlockPos(x * 16, yToAdd, z << 4), pieces, random, true, true);
             this.calculateBoundingBox();
         }
     }

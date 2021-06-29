@@ -26,13 +26,13 @@ minecraft {
 
     runs {
         client {
+            properties 'mixin.env.remapRefMap': 'true'
+            property 'mixin.env.refMapRemappingFile', "${project.projectDir}/build/createSrgToMcp/output.srg"
             workingDirectory project.file('run')
-            arg "-mixin.config=mostructures.mixins.json"
+            arg "-mixin.config="+archivesBaseName+".mixins.json"
 
 
-            property 'forge.logging.markers', 'REGISTRIES'
-
-
+            // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
             mods {
@@ -43,12 +43,13 @@ minecraft {
         }
 
         server {
+            properties 'mixin.env.remapRefMap': 'true'
+            property 'mixin.env.refMapRemappingFile', "${project.projectDir}/build/createSrgToMcp/output.srg"
             workingDirectory project.file('run')
-            arg "-mixin.config=mostructures.mixins.json"
-
-            property 'forge.logging.markers', 'REGISTRIES'
+            arg "-mixin.config="+archivesBaseName+".mixins.json"
 
 
+            // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
             mods {
@@ -60,16 +61,11 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
-
-            property 'forge.logging.markers', 'REGISTRIES'
-
+            //property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            properties 'mixin.env.remapRefMap': 'true'
+            property 'mixin.env.refMapRemappingFile', "${project.projectDir}/build/createSrgToMcp/output.srg"
             property 'forge.logging.console.level', 'debug'
-
-            args '--mod', 'mostructures', '--all',
-                    '--existing', file('src/main/resources/').toString(),
-                    '--existing', file('src/generated/resources/').toString(),
-                    '--output', file('src/generated/resources/')
-
+            args '--mod', 'mostructures', '--all', '--output', file('src/generated/resources/'), '--existing', sourceSets.main.resources.srcDirs[0]
             mods {
                 mostructures {
                     source sourceSets.main
@@ -131,6 +127,9 @@ processResources {
         println('Minified ' + jsonMinified + ' json files. Saved ' + jsonBytesSaved + ' bytes. Took ' + (System.currentTimeMillis() - jsonMinifyStart) + 'ms.')
     }
 }
+
+apply plugin: 'org.spongepowered.mixin'
+
 mixin {
     add sourceSets.main, "mostructures.refmap.json"
 }
