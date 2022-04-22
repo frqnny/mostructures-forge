@@ -1,3 +1,4 @@
-Mo' Structures for forge.
+Mo' Structures for Forge!
+idk what else to put here lol
 
-This is now archived. 
+Essentially, the plan is to keep doing this for a while.  Later, we can port over to Architectury and Archive this repository. 
